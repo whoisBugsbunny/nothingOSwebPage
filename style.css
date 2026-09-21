@@ -1,0 +1,1288 @@
+/* ==========================================================================
+   NOTHING OS MODULAR BENTO SEARCH HUB
+   Search Console is DEAD CENTER (Vertically & Horizontally)
+   True geometric circles (1:1 aspect) & Squircles
+   Original compact card padding (0.75rem) & 12px gaps
+   Zero brand header • 100% hole-free seamless grid
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Dark Mode Palette */
+  --bg-canvas: #09090b;
+  --bg-surface: #111115;
+  --bg-card: #15151a;
+  --bg-card-hover: #1c1c24;
+  --bg-card-elevated: #22222c;
+  --bg-card-subtle: rgba(255, 255, 255, 0.04);
+
+  --text-primary: #f5f5f7;
+  --text-secondary: #9a9aa6;
+  --text-muted: #5e5e6e;
+  --text-inverse: #09090b;
+
+  /* Nothing Crimson Red */
+  --accent-red: #d71921;
+  --accent-red-bright: #eb0028;
+  --accent-red-glow: rgba(215, 25, 33, 0.4);
+  --accent-red-subtle: rgba(215, 25, 33, 0.12);
+
+  /* Outlines & Borders */
+  --border-card: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(255, 255, 255, 0.28);
+  --border-dashed: rgba(255, 255, 255, 0.18);
+
+  /* Dot Grid Pattern */
+  --dot-color: rgba(255, 255, 255, 0.065);
+
+  /* Radii */
+  --radius-xs: 10px;
+  --radius-sm: 16px;
+  --radius-md: 22px;
+  --radius-lg: 28px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.5);
+  --shadow-red: 0 6px 20px var(--accent-red-glow);
+
+  /* Fonts */
+  --font-ndot: 'Silkscreen', monospace;
+  --font-display: 'Space Grotesk', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Light Mode Palette */
+[data-theme="light"] {
+  --bg-canvas: #dfe3ea;
+  --bg-surface: #d3d8e2;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f7f8fb;
+  --bg-card-elevated: #eaedf3;
+  --bg-card-subtle: rgba(0, 0, 0, 0.04);
+
+  --text-primary: #101015;
+  --text-secondary: #505060;
+  --text-muted: #828294;
+  --text-inverse: #ffffff;
+
+  --border-card: rgba(0, 0, 0, 0.08);
+  --border-focus: rgba(0, 0, 0, 0.28);
+  --border-dashed: rgba(0, 0, 0, 0.16);
+
+  --dot-color: rgba(0, 0, 0, 0.075);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  min-height: 100vh;
+  width: 100%;
+  font-family: var(--font-body);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
+}
+
+/* Center everything vertically & horizontally */
+body {
+  background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+  background-position: 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 1rem;
+}
+
+/* Typography Utilities */
+.ndot {
+  font-family: var(--font-ndot);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   MASTER BENTO CONTAINER (DEAD CENTER VERTICALLY & HORIZONTALLY)
+   ========================================================================== */
+.surrounded-hub-wrapper {
+  width: 100%;
+  max-width: 1420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+/* Master Grid: 14 columns, 6 rows, tight 12px gap, 78px base unit height */
+.bento-master-grid {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  grid-auto-rows: 78px;
+  grid-auto-flow: dense;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Base Bento Card */
+.b-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  user-select: none;
+  text-decoration: none;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+.b-card:hover {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Crimson Red Card */
+.b-card.card-red {
+  background: var(--accent-red);
+  color: #ffffff;
+  border-color: var(--accent-red);
+  box-shadow: var(--shadow-red);
+}
+
+.b-card.card-red * {
+  color: #ffffff !important;
+}
+
+/* White Dial Card */
+.b-card.card-white {
+  background: #ffffff;
+  color: #101015;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.b-card.card-white * {
+  color: #101015 !important;
+}
+
+/* --------------------------------------------------------------------------
+   PRECISE CARD SHAPES: TRUE CIRCLES & SQUIRCLES
+   -------------------------------------------------------------------------- */
+.col-1-row-1 {
+  grid-column: span 1;
+  grid-row: span 1;
+  height: 78px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* TRUE CIRCLE: mathematically 78px by 78px, 1:1 aspect ratio */
+.circle-true {
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1 !important;
+  width: 78px !important;
+  height: 78px !important;
+  padding: 0 !important;
+  justify-self: center;
+  align-self: center;
+}
+
+.col-2-row-1 {
+  grid-column: span 2;
+  grid-row: span 1;
+  height: 78px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pill-true {
+  border-radius: var(--radius-pill);
+}
+
+/* 2x2 Square Widget: EXACTLY 2 rows high (78*2 + 12 = 168px)! */
+.col-2-row-2 {
+  grid-column: span 2;
+  grid-row: span 2;
+  height: 168px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.digital-watch-card {
+  padding: 0.85rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.digital-watch-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+}
+
+.digital-watch-time {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.col-3-row-1 {
+  grid-column: span 3;
+  grid-row: span 1;
+  height: 78px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.col-3-row-2 {
+  grid-column: span 3;
+  grid-row: span 2;
+  height: 168px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   CENTERPIECE: SEARCH CONSOLE (DEAD CENTER VERTICALLY & HORIZONTALLY)
+   Anchored at Columns 5 to 11 and Rows 3 to 5 (Span 6 cols, 2 rows)
+   Height: 168px with comfortable internal breathing room and padding
+   ========================================================================== */
+.search-center-console {
+  grid-column: 5 / 11 !important;
+  grid-row: 3 / 5 !important;
+  height: 168px !important;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-focus);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.65rem;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 50;
+  box-sizing: border-box;
+}
+
+/* Search Navigation Tabs */
+.search-nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-mode-tabs {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.mode-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+}
+
+.mode-tab-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-subtle);
+}
+
+.mode-tab-btn.active {
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border-color: var(--border-card);
+}
+
+.mode-tab-btn.ai-tab.active {
+  background: linear-gradient(135deg, rgba(215, 25, 33, 0.22), rgba(235, 0, 40, 0.08));
+  border-color: var(--accent-red);
+  color: var(--text-primary);
+}
+
+.ai-chip {
+  font-family: var(--font-ndot);
+  font-size: 0.58rem;
+  background: var(--accent-red);
+  color: #fff;
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--radius-pill);
+}
+
+.active-engine-text {
+  font-family: var(--font-ndot);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+/* Search Input Pill with proper padding & gap */
+.search-pill-container {
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.6rem 0.35rem 0.85rem;
+  gap: 0.75rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-fast);
+}
+
+.search-pill-container:focus-within {
+  border-color: var(--border-focus);
+  background: var(--bg-card-hover);
+}
+
+/* Engine Dropdown */
+.engine-switcher-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.65rem;
+  background: var(--bg-card-elevated);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.engine-switcher-btn:hover {
+  border-color: var(--border-focus);
+}
+
+.engine-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  object-fit: contain;
+}
+
+.engine-menu-box {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 0.4rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.2rem;
+  z-index: 100;
+  min-width: 190px;
+  backdrop-filter: blur(20px);
+}
+
+.engine-menu-box.show {
+  display: flex;
+}
+
+.engine-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.engine-menu-item:hover {
+  background: var(--bg-card-hover);
+}
+
+.engine-menu-item.selected {
+  background: var(--bg-card-elevated);
+  font-weight: 600;
+}
+
+.engine-menu-item.selected::after {
+  content: '●';
+  margin-left: auto;
+  color: var(--accent-red);
+  font-size: 0.75rem;
+}
+
+/* Query Input */
+.search-query-field {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  padding: 0.2rem 0;
+}
+
+.search-query-field::placeholder {
+  color: var(--text-muted);
+}
+
+/* Action buttons in search */
+.search-action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.search-action-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-elevated);
+}
+
+.search-action-btn.recording {
+  color: var(--accent-red);
+  animation: pulseRecording 1.4s infinite;
+}
+
+.search-go-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.search-go-btn:hover {
+  transform: scale(1.08);
+}
+
+/* Suggestions Dropdown */
+.search-suggest-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 0.4rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.15rem;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+}
+
+.search-suggest-dropdown.show {
+  display: flex;
+}
+
+.suggest-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-xs);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.suggest-row:hover, .suggest-row.active {
+  background: var(--bg-card-hover);
+}
+
+/* Hot chips row */
+.search-hot-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.search-hot-tags::-webkit-scrollbar { display: none; }
+
+.hot-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  padding: 0.22rem 0.6rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.hot-tag:hover {
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+}
+
+/* ==========================================================================
+   SPECIFIC MODULAR WIDGETS
+   ========================================================================== */
+
+/* 1. ANALOG CLOCK (Pure 2x2 Square, White Dial, Real Needles, Red Second Hand) */
+.analog-dial-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.analog-center-pin {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-red);
+  border-radius: 50%;
+  position: absolute;
+  z-index: 10;
+}
+
+.analog-needle {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: var(--radius-pill);
+}
+
+.analog-needle.h-hand {
+  width: 3px;
+  height: 38px;
+  background: #111;
+  margin-left: -1.5px;
+  z-index: 3;
+}
+
+.analog-needle.m-hand {
+  width: 2px;
+  height: 54px;
+  background: #555;
+  margin-left: -1px;
+  z-index: 4;
+}
+
+.analog-needle.s-hand {
+  width: 1.5px;
+  height: 64px;
+  background: var(--accent-red);
+  margin-left: -0.75px;
+  z-index: 5;
+}
+
+/* 2. BIG CALENDAR CARD "29" (2x2) */
+.cal-date-huge {
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  font-weight: 700;
+  line-height: 0.95;
+  text-align: center;
+  margin: auto 0;
+  letter-spacing: -0.04em;
+}
+
+/* 3. FOCUS TIMER (2x1 Red Pill) */
+.timer-digits-val {
+  font-family: var(--font-ndot);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.timer-sub-text {
+  font-family: var(--font-ndot);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+}
+
+.timer-action-btn {
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.65rem;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.timer-action-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* 4. SPOTIFY / MUSIC PLAYER WITH ANIMATED EQUALIZER (2x1) */
+.audio-meta-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.audio-eq-visual {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 16px;
+}
+
+.audio-eq-bar {
+  width: 3px;
+  background: var(--text-primary);
+  border-radius: var(--radius-pill);
+  height: 5px;
+}
+
+.audio-eq-bar.active {
+  background: var(--accent-red);
+}
+
+.playing .audio-eq-bar:nth-child(1) { animation: eqJump 0.8s infinite alternate; }
+.playing .audio-eq-bar:nth-child(2) { animation: eqJump 1.1s infinite 0.1s alternate; }
+.playing .audio-eq-bar:nth-child(3) { animation: eqJump 0.9s infinite 0.2s alternate; }
+.playing .audio-eq-bar:nth-child(4) { animation: eqJump 1.2s infinite 0.15s alternate; }
+
+.audio-ctrl-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* 5. SCRATCHPAD QUICK NOTES (4x2 or 3x2) */
+.scratchpad-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.scratchpad-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+  resize: none;
+  margin-top: 0.4rem;
+}
+
+.scratchpad-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* 6. GLYPH ACTION BOX (Icons with micro labels) */
+.glyph-action-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.glyph-action-box svg {
+  width: 20px;
+  height: 20px;
+  color: var(--text-primary);
+}
+
+.glyph-action-lbl {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+
+/* 7. CIRCULAR REC BUTTON (1x1 TRUE CIRCLE) */
+.rec-pulse-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rec-core-dot {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  animation: pulseRecording 1.4s infinite;
+}
+
+.rec-core-text {
+  font-family: var(--font-ndot);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* ==========================================================================
+   DYNAMIC BOOKMARKS & SHORTCUTS IN THE SURROUNDED GRID
+   Supports: 1x1 Squircle, 1x1 True Circle, 2x1 Pill, 2x2 Photo Card
+   ========================================================================== */
+.shortcut-item {
+  cursor: pointer;
+}
+
+.shortcut-item.col-1-row-1 {
+  gap: 0.25rem;
+  padding: 0.5rem 0.25rem;
+}
+
+.shortcut-item.circle-true {
+  padding: 0.4rem !important;
+}
+
+.sc-icon-1x1 {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.shortcut-item.circle-true .sc-icon-1x1 {
+  border-radius: 50%;
+}
+
+.sc-icon-1x1 img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.sc-title-1x1 {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 85%;
+}
+
+/* 2x1 Pill Shortcut */
+.shortcut-item.col-2-row-1 {
+  padding: 0.55rem 0.85rem;
+  gap: 0.65rem;
+  justify-content: flex-start;
+}
+
+.shortcut-item.col-2-row-1 .sc-icon-1x1 {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.sc-info-2x1 {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sc-title-2x1 {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sc-domain-2x1 {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+}
+
+/* 2x2 Square Photo Card */
+.shortcut-item.col-2-row-2.card-photo-box {
+  padding: 0;
+}
+
+.sc-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sc-cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 55%, transparent 100%);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #fff;
+}
+
+.sc-cover-title {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.sc-cover-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Delete button on hover */
+.sc-del-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 0.85rem;
+  transition: all var(--transition-fast);
+}
+
+.shortcut-item:hover .sc-del-btn {
+  display: flex;
+}
+
+.sc-del-btn:hover {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+}
+
+/* ADD SHORTCUT CARD IN THE GRID */
+.add-shortcut-card {
+  border: 1.5px dashed var(--border-dashed);
+  background: var(--bg-card-subtle);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.add-shortcut-card:hover {
+  border-color: var(--accent-red);
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.add-shortcut-card svg {
+  width: 18px;
+  height: 18px;
+}
+
+.add-shortcut-card span {
+  font-family: var(--font-ndot);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================================================
+   MODAL DIALOGS
+   ========================================================================== */
+.modal-layer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-layer.open {
+  display: flex;
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-dialog {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-focus);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 480px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-bar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-tit {
+  font-family: var(--font-ndot);
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+}
+
+.modal-close-ico {
+  width: 30px;
+  height: 30px;
+  background: var(--bg-card-elevated);
+  border: 1px solid var(--border-card);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.modal-close-ico:hover {
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+}
+
+.modal-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.modal-input-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.modal-text-input {
+  background: var(--bg-card-elevated);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xs);
+  padding: 0.65rem 0.85rem;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.modal-text-input:focus {
+  border-color: var(--border-focus);
+}
+
+/* Sizing Selector in Modal */
+.size-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.size-pill-option {
+  border: 1.5px solid var(--border-card);
+  border-radius: var(--radius-xs);
+  padding: 0.5rem 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  background: var(--bg-card-elevated);
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.size-pill-option:hover {
+  border-color: var(--border-focus);
+}
+
+.size-pill-option input {
+  display: none;
+}
+
+.size-pill-option.active-size {
+  border-color: var(--accent-red);
+  background: var(--accent-red-subtle);
+  color: var(--text-primary);
+}
+
+.mini-box-shape {
+  background: var(--text-secondary);
+  border-radius: 4px;
+}
+.mini-box-shape.s-1x1 { width: 18px; height: 18px; }
+.mini-box-shape.s-1x1c { width: 18px; height: 18px; border-radius: 50%; }
+.mini-box-shape.s-2x1 { width: 36px; height: 18px; border-radius: 999px; }
+.mini-box-shape.s-2x2 { width: 28px; height: 28px; }
+
+.modal-actions-box {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.btn-secondary-flat {
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card-elevated);
+  border: 1px solid var(--border-card);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.btn-crimson-solid {
+  padding: 0.55rem 1.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent-red);
+  border: 1px solid var(--accent-red);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-red);
+  transition: all var(--transition-fast);
+}
+
+.btn-crimson-solid:hover {
+  background: var(--accent-red-bright);
+}
+
+/* Calculator Modal */
+.calc-window {
+  max-width: 320px;
+}
+
+.calc-display {
+  background: var(--bg-card-elevated);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xs);
+  padding: 0.75rem 1rem;
+  text-align: right;
+  font-family: var(--font-ndot);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calc-keys-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.calc-btn {
+  height: 42px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-card-elevated);
+  border: 1px solid var(--border-card);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.calc-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-focus);
+}
+
+.calc-btn.op-btn {
+  background: var(--accent-red);
+  color: #fff;
+  border-color: var(--accent-red);
+}
+
+/* Toast Bar */
+.toast-msg-bar {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-focus);
+  border-radius: var(--radius-pill);
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-md);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toast-msg-bar.show {
+  display: flex;
+  animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseRecording {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.18); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes eqJump {
+  0% { height: 4px; }
+  50% { height: 16px; }
+  100% { height: 8px; }
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .bento-master-grid {
+    grid-template-columns: repeat(8, 1fr);
+  }
+  .search-center-console {
+    grid-column: span 8 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .bento-master-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 72px;
+    gap: 8px;
+  }
+  .search-center-console {
+    grid-column: span 4 !important;
+  }
+  .col-3-row-1, .col-3-row-2 {
+    grid-column: span 4;
+  }
+  .col-2-row-1, .col-2-row-2 {
+    grid-column: span 2;
+  }
+}
